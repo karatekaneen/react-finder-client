@@ -1,32 +1,40 @@
 import React, { Component } from 'react'
-import { Form, FormControl, FormGroup } from 'react-bootstrap'
+import Select from 'react-select'
+import 'bootstrap/dist/css/bootstrap.min.css'
 
 class CurrencyPicker extends Component {
 	constructor(props) {
 		super(props)
 
 		this.state = {
-			isShow: true
+			isSelected: ''
+		}
+		this.emitChange = event => {
+			this.props.changeCurrency(event.value)
 		}
 	}
 
 	render() {
-		const availableRates = Object.keys(this.props.availableRates.rates)
+		const customStyles = {
+			option: (provided, state) => ({
+				...provided,
+				color: state.isSelected ? '#dddddd' : 'Black'
+			})
+		}
+		const availableRates = Object.keys(this.props.availableRates.rates).map(
+			item => {
+				return { label: item, value: item }
+			}
+		)
 		return (
-			<div>
-				{JSON.stringify(availableRates, null, 3)}
-				<Form>
-					<Form.Group controlId="exampleForm.ControlSelect1">
-						<Form.Label>Example select</Form.Label>
-						<Form.Control as="select">
-							<option>1</option>
-							<option>2</option>
-							<option>3</option>
-							<option>4</option>
-							<option>5</option>
-						</Form.Control>
-					</Form.Group>
-				</Form>
+			<div className="col-sm-6 offset-sm-3">
+				<Select
+					styles={customStyles}
+					autoFocus
+					className="currency-selector"
+					options={availableRates}
+					onChange={this.emitChange}
+				/>
 			</div>
 		)
 	}

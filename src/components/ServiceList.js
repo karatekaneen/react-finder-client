@@ -1,21 +1,36 @@
 import React, { Component } from 'react'
-import { getExchangeRates } from '../utils/ApiClient'
+import { loadData } from '../utils/ApiClient'
 import CurrencyPicker from './CurrencyPicker'
-import LinkedStateMixin from 'react-addons-linked-state-mixin'
+import ServiceCardContainer from './ServiceCardContainer'
 
 class ServiceList extends Component {
-	state = {
-		exchangeRates: {},
-		selectedCurrency: 'USD',
-		isLoaded: false,
-		error: null
+	constructor(props) {
+		super(props)
+		this.state = {
+			exchangeRates: {},
+			selectedCurrency: 'USD',
+			isLoaded: false,
+			error: null,
+			services: []
+		}
+
+		this.changeCurrency = this.changeCurrency.bind(this)
+	}
+	// state = {
+	// }
+
+	changeCurrency(newCurrency) {
+		this.setState({
+			selectedCurrency: newCurrency
+		})
 	}
 
 	componentDidMount() {
-		const data = getExchangeRates()
+		const data = loadData()
 			.then(res => {
 				this.setState({
-					exchangeRates: res,
+					exchangeRates: res.exchangeRates,
+					services: res.services,
 					isLoaded: true
 				})
 			})
@@ -28,17 +43,42 @@ class ServiceList extends Component {
 	}
 
 	render() {
-		const { exchangeRates, selectedCurrency, isLoaded, error } = this.state
+		const {
+			exchangeRates,
+			selectedCurrency,
+			isLoaded,
+			error,
+			services
+		} = this.state
+		const changeCurrency = this.changeCurrency
+		changeCurrency.bind(this)
 		if (isLoaded) {
 			if (error) {
 				return <div>FEL</div>
 			} else {
 				return (
-					<div>
-						{/* <div>{JSON.stringify(exchangeRates, null, 3)}</div> */}
+					<div className="container-fluid">
+						<div className="row">
+							{/* <div>{JSON.stringify(exchangeRates, null, 3)}</div> */}
 
-						<div>VALD: {exchangeRates.rates[selectedCurrency]}</div>
-						<CurrencyPicker availableRates={exchangeRates} />
+							<div className="col-sm-12">
+								VALD: {selectedCurrency} -{' '}
+								{exchangeRates.rates[selectedCurrency]}
+							</div>
+							<CurrencyPicker
+								changeCurrency={changeCurrency}
+								availableRates={exchangeRates}
+							/>
+						</div>
+						<div>
+							<ServiceCardContainer
+								services={services}
+								currency={{
+									factor: exchangeRates.rates[selectedCurrency],
+									label: selectedCurrency
+								}}
+							/>
+						</div>
 					</div>
 				)
 			}
