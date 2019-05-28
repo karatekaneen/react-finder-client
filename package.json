@@ -1,0 +1,85 @@
+{
+	"name": "react-finder-client",
+	"version": "0.1.0",
+	"private": true,
+	"dependencies": {
+		"react": "^16.8.6",
+		"react-dom": "^16.8.6",
+		"react-scripts": "3.0.1"
+	},
+	"scripts": {
+		"start": "react-scripts start",
+		"build": "react-scripts build",
+		"test": "react-scripts test",
+		"eject": "react-scripts eject"
+	},
+	"eslintConfig": {
+		"extends": "react-app",
+		"root": true,
+		"env": {
+			"node": true
+		},
+		"plugins": [
+			"prettier"
+		],
+		"rules": {
+			"no-var": "error",
+			"prefer-const": [
+				"error",
+				{
+					"destructuring": "any",
+					"ignoreReadBeforeAssign": false
+				}
+			],
+			"function-paren-newline": [
+				1,
+				{
+					"minItems": 4
+				}
+			],
+			"camelcase": [
+				2,
+				{
+					"properties": "always"
+				}
+			],
+			"space-before-function-paren": [
+				"error",
+				{
+					"anonymous": "never",
+					"named": "never",
+					"asyncArrow": "always"
+				}
+			],
+			"indent": [
+				"warn",
+				"tab"
+			],
+			"no-tabs": "off"
+		},
+		"parserOptions": {
+			"parser": "babel-eslint"
+		}
+	},
+	"prettier": {
+		"tabWidth": 3,
+		"singleQuote": true,
+		"semi": false,
+		"useTabs": true
+	},
+	"browserslist": {
+		"production": [
+			">0.2%",
+			"not dead",
+			"not op_mini all"
+		],
+		"development": [
+			"last 1 chrome version",
+			"last 1 firefox version",
+			"last 1 safari version"
+		]
+	},
+	"devDependencies": {
+		"prettier": "^1.17.1"
+	}
+}
