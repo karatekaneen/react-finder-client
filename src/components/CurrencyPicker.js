@@ -27,7 +27,7 @@ class CurrencyPicker extends Component {
 			}
 		)
 		return (
-			<div className="col-sm-6 offset-sm-3">
+			<div className="col-sm-4">
 				<Select
 					styles={customStyles}
 					autoFocus

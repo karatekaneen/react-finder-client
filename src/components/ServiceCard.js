@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import ServiceCardContainer from './ServiceCardContainer'
+import { formatPrice } from '../utils/PriceFormatter'
 import '../assets/components.css'
 class ServiceCard extends Component {
 	constructor(props) {
@@ -29,12 +29,13 @@ class ServiceCard extends Component {
 			}
 			timeStamps = assignTimeStamps()
 		}
-		if (service.ServiceType.Name == 'Erbjuden') {
+		if (service.ServiceType.Name === 'Erbjuden') {
 			serviceType = <span className="badge badge-primary">Erbjuden</span>
-		} else if (service.ServiceType.Name == 'Önskad') {
+		} else if (service.ServiceType.Name === 'Önskad') {
 			serviceType = <span className="badge badge-success">Önskad</span>
 		}
 		return (
+			// <div className="col-xs-12 col-md-6 col-lg-4">
 			<div className="card">
 				<img
 					src={service.Picture}
@@ -42,9 +43,9 @@ class ServiceCard extends Component {
 					alt="Service description image"
 				/>
 				<div className="card-header">
-					<div className="service-card-title">{service.Title}</div>
-					<div className="service-card-title service-card-price">
-						{(service.Price * currency.factor).toFixed(1)}{' '}
+					<div className="h4 service-card-title ">{service.Title}</div>
+					<div className="h5 service-card-price">
+						{formatPrice(service.Price * currency.factor)}{' '}
 						{currency.label}
 					</div>
 					{serviceType}
@@ -62,13 +63,12 @@ class ServiceCard extends Component {
 						<div className="service-card-description-title">
 							Beskrivning
 						</div>
-						<div className="service-card-description-text">
-							{service.Description}
-						</div>
+						<div className="lead">{service.Description}</div>
 					</div>
 					{timeStamps}
 				</div>
 			</div>
+			// </div>
 		)
 	}
 }
