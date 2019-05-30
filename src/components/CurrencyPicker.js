@@ -2,6 +2,9 @@ import React, { Component } from 'react'
 import Select from 'react-select'
 import 'bootstrap/dist/css/bootstrap.min.css'
 
+/**
+ * Komponent för att välja valuta som priser skall visas i.
+ */
 class CurrencyPicker extends Component {
 	constructor(props) {
 		super(props)
@@ -27,15 +30,14 @@ class CurrencyPicker extends Component {
 			}
 		)
 		return (
-			<div className="col-sm-4">
-				<Select
-					styles={customStyles}
-					autoFocus
-					className="currency-selector"
-					options={availableRates}
-					onChange={this.emitChange}
-				/>
-			</div>
+			<Select
+				styles={customStyles}
+				autoFocus
+				placeholder="Byt valuta"
+				className="currency-selector"
+				options={availableRates}
+				onChange={this.emitChange}
+			/>
 		)
 	}
 }

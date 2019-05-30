@@ -1,4 +1,9 @@
 const axios = require('axios')
+
+/**
+ * Metod för att hämta valutakurser
+ * @returns {Promise} Svar fårn API.
+ */
 const getExchangeRates = () => {
 	return new Promise((resolve, reject) => {
 		axios
@@ -10,6 +15,10 @@ const getExchangeRates = () => {
 	})
 }
 
+/**
+ * Metod för att hämta Annonser
+ * @returns {Promise} Svar fårn API.
+ */
 const getServices = () => {
 	return new Promise((resolve, reject) => {
 		axios
@@ -21,6 +30,13 @@ const getServices = () => {
 	})
 }
 
+/**
+ * Sammanslagen metod för att hämta både valutakurser
+ * och annonser samtidigt.
+ * @returns {object} API-data
+ * @property exchangeRates - valutakurser
+ * @property services - annonser
+ */
 exports.loadData = () => {
 	return new Promise((resolve, reject) => {
 		const exchangeRates = getExchangeRates()
