@@ -40,7 +40,7 @@ class ServiceCard extends Component {
 				<img
 					src={service.Picture}
 					className="card-img-top service-card-image"
-					alt="Service description image"
+					alt="Service description"
 				/>
 				<div className="card-header">
 					<div className="h4 service-card-title ">{service.Title}</div>

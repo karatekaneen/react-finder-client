@@ -5,10 +5,6 @@ import ServiceCard from './ServiceCard'
  * Komponent för att loopa över alla annonser att visa
  */
 class ServiceCardContainer extends Component {
-	constructor(props) {
-		super(props)
-	}
-
 	render() {
 		const services = this.props.services.map(service => {
 			return (
